@@ -1904,6 +1904,27 @@ class Telegram
 			return $this->data["message"]["photo"][0]["file_id"];
 	}
 	
+	/// Get small size photo file_id of current message
+	public function smallPhotoFileID()
+	{
+		if ($this->getUpdateType() == 'photo')
+			return $this->data["message"]["photo"][0]["file_id"];
+	}
+	
+	/// Get middle size photo file_id of current message
+	public function middlePhotoFileID()
+	{
+		if ($this->getUpdateType() == 'photo')
+			return $this->data["message"]["photo"][1]["file_id"];
+	}
+	
+	/// Get big size photo file_id of current message
+	public function bigPhotoFileID()
+	{
+		if ($this->getUpdateType() == 'photo')
+			return $this->data["message"]["photo"][2]["file_id"];
+	}
+	
 	/// Get voice file_id of current message
 	public function voiceFileID()
 	{
