@@ -1897,6 +1897,35 @@ class Telegram
         return $this->data['message']['from']['id'];
     }
 	
+	/// return contact phone Number
+	public function getContactPhoneNumber()
+	{
+		if ($this->getUpdateType() == 'contact')
+			return $this->data["message"]["contact"]["phone_number"];
+	}
+	
+	/// return contact first_name
+	public function getContactFirstName()
+	{
+		if ($this->getUpdateType() == 'contact')
+			return $this->data["message"]["contact"]["first_name"];
+	}	
+	
+	/// return latitude
+	public function Latitude()
+	{
+		if ($this->getUpdateType() == 'location')
+			return $this->data["message"]["location"]["latitude"];
+	}
+	
+	/// return longitude
+	public function Longitude()
+	{
+		if ($this->getUpdateType() == 'location')
+			return $this->data["message"]["location"]["longitude"];
+	}	
+	
+	
 	/// Get photo file_id of current message
 	public function photoFileID()
 	{
