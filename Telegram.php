@@ -1838,6 +1838,9 @@ class Telegram
         if ($type == self::EDITED_MESSAGE) {
             return @$this->data['edited_message']['from']['first_name'];
         }
+        if ($type == self::INLINE_QUERY) {
+            return @$this->data['inline_query']['from']['first_name'];
+        }		
 
         return @$this->data['message']['from']['first_name'];
     }
@@ -1855,6 +1858,10 @@ class Telegram
         if ($type == self::EDITED_MESSAGE) {
             return @$this->data['edited_message']['from']['last_name'];
         }
+        if ($type == self::INLINE_QUERY) {
+            return @$this->data['inline_query']['from']['last_name'];
+        }		
+		
 
         return @$this->data['message']['from']['last_name'];
     }
@@ -1872,6 +1879,10 @@ class Telegram
         if ($type == self::EDITED_MESSAGE) {
             return @$this->data['edited_message']['from']['username'];
         }
+        if ($type == self::INLINE_QUERY) {
+            return @$this->data['inline_query']['from']['username'];
+        }		
+		
 
         return @$this->data['message']['from']['username'];
     }
@@ -1907,6 +1918,9 @@ class Telegram
         if ($type == self::EDITED_MESSAGE) {
             return @$this->data['edited_message']['from']['id'];
         }
+        if ($type == self::INLINE_QUERY) {
+            return @$this->data['inline_query']['from']['id'];
+        }			
 
         return $this->data['message']['from']['id'];
     }
