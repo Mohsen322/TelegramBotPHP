@@ -1981,7 +1981,7 @@ class Telegram
 	public function bigPhotoFileID()
 	{
 		if ($this->getUpdateType() == 'photo')
-			return $this->data["message"]["photo"][2]["file_id"];
+                       return end($this->data["message"]["photo"])["file_id"];
 	}
 	
 	/// Get voice file_id of current message
