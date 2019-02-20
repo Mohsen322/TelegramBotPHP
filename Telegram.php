@@ -1931,11 +1931,30 @@ class Telegram
         }
         if ($type == self::INLINE_QUERY) {
             return @$this->data['inline_query']['from']['username'];
-        }		
-		
+        }
 
         return @$this->data['message']['from']['username'];
     }
+	
+    /// Get the is_bot status of the user
+    public function IsBot()
+    {
+        $type = $this->getUpdateType();
+        if ($type == self::CALLBACK_QUERY) {
+            return @$this->data['callback_query']['from']['is_bot'];
+        }
+        if ($type == self::CHANNEL_POST) {
+            return @$this->data['channel_post']['from']['is_bot'];
+        }
+        if ($type == self::EDITED_MESSAGE) {
+            return @$this->data['edited_message']['from']['is_bot'];
+        }
+        if ($type == self::INLINE_QUERY) {
+            return @$this->data['inline_query']['from']['is_bot'];
+        }		
+		
+        return @$this->data['message']['from']['is_bot'];
+    }	
 	
     /// return the mew_chat_member Array of the current message
     public function NewChatMember()
