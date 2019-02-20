@@ -1732,13 +1732,63 @@ class Telegram
     {
         return $this->data['message']['reply_to_message']['message_id'];
     }
+	
+    /// Get the reply_to_message text of the current message
+
+    /**
+     * \return the String reply_to_message text.
+     */
+    public function ReplyToMessageText()
+    {
+        return $this->data['message']['reply_to_message']['text'];
+    }
+	
+    /// Get the reply_to_message from user username of the current message
+
+    /**
+     * \return the String reply_to_message from username.
+     */
+    public function ReplyToMessageFromUsername()
+    {
+        return $this->data['message']['reply_to_message']['from']['username'];
+    }
+	
+    /// Get the reply_to_message from user first_name of the current message
+
+    /**
+     * \return the String reply_to_message from first_name.
+     */
+    public function ReplyToMessageFromUserFirstName()
+    {
+        return $this->data['message']['reply_to_message']['from']['first_name'];
+    }
+	
+    /// Get the reply_to_message from user last_name of the current message
+
+    /**
+     * \return the String reply_to_message from last_name.
+     */
+    public function ReplyToMessageFromUserLastName()
+    {
+        return $this->data['message']['reply_to_message']['from']['last_name'];
+    }	
+	
+    /// Get the reply_to_message from user id of the current message
+
+    /**
+     * \return the String reply_to_message from user id.
+     */
+    public function ReplyToMessageFromUserID()
+    {
+        return $this->data['message']['reply_to_message']['from']['id'];
+    }	
 
     /// Get the reply_to_message forward_from user_id of the current message
 
     /**
      * \return the String reply_to_message forward_from user_id.
      */
-    public function ReplyToMessageFromUserID()
+    public function ReplyToMessageForwardFromUserID()
     {
         return $this->data['message']['reply_to_message']['forward_from']['id'];
     }
@@ -1886,6 +1936,12 @@ class Telegram
 
         return @$this->data['message']['from']['username'];
     }
+	
+    /// return the mew_chat_member Array of the current message
+    public function NewChatMember()
+    {
+        return $this->data['message']['new_chat_members'];
+    }	
 
     /// Get the location in the message
     public function Location()
@@ -1981,7 +2037,7 @@ class Telegram
 	public function bigPhotoFileID()
 	{
 		if ($this->getUpdateType() == 'photo')
-                       return end($this->data["message"]["photo"])["file_id"];
+			return $this->data["message"]["photo"][2]["file_id"];
 	}
 	
 	/// Get voice file_id of current message
@@ -2011,6 +2067,41 @@ class Telegram
 		if ($this->getUpdateType() == 'document')
 			return $this->data["message"]["document"]["file_id"];
 	}
+	
+	/// Get document mime_type of current message
+	public function documentMimeType()
+	{
+		if ($this->getUpdateType() == 'document')
+			return $this->data["message"]["document"]["mime_type"];
+	}
+	
+	/// Get document mime_type extension of current message -- return 3 character's of file extenstion
+	public function getDocumentMimeTypeExtension()
+	{
+		if ($this->getUpdateType() == 'document'){
+			$mime_type = $this->data["message"]["document"]["mime_type"];
+			if($mime_type == 'application/vnd.android.package-archive')
+				return 'apk';
+			elseif($mime_type == 'application/zip')
+				return 'zip';
+			elseif($mime_type == 'application/x-rar')
+				return 'rar';
+			elseif($mime_type == 'application/msword')
+				return 'doc';
+			elseif($mime_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+				return 'docx';
+			elseif($mime_type == 'application/vnd.ms-excel')
+				return 'xls';			
+			elseif($mime_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+				return 'xlsx';			
+			elseif($mime_type == 'application/javascript')
+				return 'js';			
+			elseif($mime_type == 'application/x-php')
+				return 'php';
+			elseif($mime_type == 'text/x-sql')
+				return 'sql';			
+		}
+	}	
 	
 	// MOHSEN ADDED FUNCTIONS //
 
@@ -2526,6 +2617,7 @@ class Telegram
 
     /**
      * Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Pass False for all boolean parameters to demote a user. Returns True on success
+
      * <table>
      * <tr>
      * <td><strong>Parameters</strong></td>
@@ -3210,6 +3302,7 @@ class Telegram
                 TelegramErrorLogger::log(json_decode($result, true), $loggerArray);
             }
         }
+
 
         return $result;
     }
