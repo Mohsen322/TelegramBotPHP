@@ -52,6 +52,10 @@ class Telegram
      */
     const DOCUMENT = 'document';
     /**
+     * Constant for type animation.
+     */
+    const ANIMATION = 'animation';	
+    /**
      * Constant for type Location.
      */
     const LOCATION = 'location';
@@ -3238,9 +3242,6 @@ class Telegram
         if (isset($update['edited_message'])) {
             return self::EDITED_MESSAGE;
         }
-        if (isset($update['message']['reply_to_message'])) {
-            return self::REPLY;
-        }
         if (isset($update['message']['text'])) {
             return self::MESSAGE;
         }
@@ -3259,12 +3260,18 @@ class Telegram
         if (isset($update['message']['contact'])) {
             return self::CONTACT;
         }
-        if (isset($update['message']['document'])) {
-            return self::DOCUMENT;
-        }
         if (isset($update['message']['location'])) {
             return self::LOCATION;
         }
+        if (isset($update['message']['document'])) {
+            return self::DOCUMENT;
+	}
+        if (isset($update['message']['animation'])) {
+            return self::ANIMATION;
+        }	    
+        if (isset($update['message']['reply_to_message'])) {
+            return self::REPLY;
+        }	    
         if (isset($update['channel_post'])) {
             return self::CHANNEL_POST;
         }
